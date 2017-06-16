@@ -2,6 +2,7 @@
 
 const logger = require('../utils/logger');
 const playlistStore = require('../models/playlist-store');
+const uuid = require('uuid');
 
 const playlist = {
   index(request, response) {
@@ -26,9 +27,11 @@ const playlist = {
     const playlistId = request.params.id;
     const playlist = playlistStore.getPlaylist(playlistId);
     const newSong = {
+      id: uuid(),
       title: request.body.title,
       artist: request.body.artist,
     };
+    logger.debug('New Song = ', newSong);
     playlistStore.addSong(playlistId, newSong);
     response.redirect('/playlist/' + playlistId);
   },
