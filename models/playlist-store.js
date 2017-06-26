@@ -16,6 +16,10 @@ const playlistStore = {
     return this.store.findOneBy(this.collection, { id: id });
   },
 
+  getUserPlaylists(userid) {
+    return this.store.findBy(this.collection, { userid: userid });
+  },
+
   addPlaylist(playlist) {
     this.store.add(this.collection, playlist);
     this.store.save();
